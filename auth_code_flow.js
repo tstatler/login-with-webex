@@ -8,15 +8,10 @@ var randomString = function(length) {
     return str;
 }
 
-function reset() {
-    sessionStorage.clear();
-    document.location = window.location.href.split(/\?|#/i)[0];
-}
-
+// Function to generate code verifier and code challenge
 function generateCodeChallenge() {
-    
+	//TBD
 }
-
 
 
 // Helper 	 that parses a query string into a dictionary object
@@ -30,17 +25,9 @@ var parseQueryStr = function( queryString) {
     return params;
 };
 
-// Step #1: Fires when the user clicks the 'Request Auth Code' button
+// Step #1: Runs when the user clicks the 'Request Auth Code' button
 function codeClick() {
 
-    var appClientId = document.getElementById('client_id').value
-    if(appClientId) {
-        sessionStorage.setItem("client_id", appClientId); 
-    }
-    var appClientSecret = document.getElementById('client_secret').value
-    if(appClientSecret) {
-        sessionStorage.setItem("client_secret", appClientSecret); 
-    }
 	var appRedirectUri=encodeURIComponent(document.getElementById('redirect_uri').value);
 	var scope = encodeURIComponent(document.getElementById('scope_list').value);
 	var responseType = encodeURIComponent(document.getElementById('response_type').value);
@@ -59,7 +46,7 @@ function codeClick() {
 		'state=' + state + '&' +	// Random string for OAuth2 nonce replay protection
 		'client_id=' + appClientId + '&' + // The custom app Client ID
 		// 'prompt=select_account' + '&' +
-		// 'login_hint=tim.statler@gmail.com' + '&' +
+		// 'login_hint=user@example.com' + '&' +
 		'nonce=' + nonce + '&' + // Nonce, required for OpenID Connect
 		// 'code_challenge=' + codeChallenge + '&' + // PKCE code challenge
 		// 'code_challenge_method=' + codeChallengeMethod + '&' + // PKCE code challenge method

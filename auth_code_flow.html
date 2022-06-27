@@ -14,7 +14,7 @@
 
 <body>    
 
-    <div class="container w-50">
+    <div class="container w-50" style="padding: 5em ;">
         <h1>Authorization Code Flow Demo</h1>
 
 
@@ -64,61 +64,67 @@
                         <small class="text-muted">Must match one of the redirect URIs specified for your integration.</small>
                     </div>
                 </div>
-
+<!-- 
                 <div class="form-group row">
                     <label for="response_types" class="col-sm-4 col-form-label"
                       ></label
                     >
                     <div class="col-sm-8">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="responseType" id="checkbox_use_pkce" value="code" checked>
+                            <input class="form-check-input" type="checkbox" disabled name="responseType" id="checkbox_use_pkce" value="code">
                             <label class="form-check-label" for="gridRadios1">
                               Use PKCE
                             </label>
                           </div>
                           <small class="text-muted">Select to use PKCE.</small>
                     </div>
-                  </div>                
+                  </div>                 -->
 
                 <div class="form-group row">
                     <label for="code_verifier" class="col-sm-4 col-form-label">Code verifier</label>
                     <div class="col-sm-8">
                         <input class="form-control" id="code_verifier" />
-                    </div>
+                        <small class="text-muted">Cryptographically random string between 43 and 128 characters in length and consist only numbers, upper- and lower-case letters, hyphens, dots, tildes, or underscores. </small>
+                        
+                    </div>                    
                 </div>
                 <div class="form-group row">
                     <label for="code_challenge" class="col-sm-4 col-form-label">Code challenge</label>
                     <div class="col-sm-8">
                         <input class="form-control" id="code_challenge" />
+                        <small class="text-muted">Base64-encoded SHA-256 hash of the Code Verifier string, or, the same value as the Code Verifier, depending on the selected Code Challenge Method. </small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="code_challenge_method" class="col-sm-4 col-form-label">Code challenge method</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="code_challenge_method" />
+                    <select name="code_challenge_method" id="code_challenge_method" class="form-select" aria-label="Default select example">
+                        <option value="s256" selected>S256</option>
+                        <option value="plain">Plain</option>                    
+                      </select>                    
+
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-4">
+                <div class="row justify-content-md-center p-3">
+                    <div class="col col-md-auto">
                         <button type="button" class="btn btn-primary" onclick="codeClick()">
                             Get Auth Code
                         </button>
                     </div>
-                    <div class="col-sm-4 ">
-                        <button type="button" class="btn btn-primary" id="token_button" onclick="tokenClick()">
-                            Get Tokens
-                        </button>
-                    </div>
-                </div>
-
-
+                  </div>
                 <div class="form-group row">
                     <label for="auth_code" class="col-sm-4 col-form-label">Authorization code</label>
                     <div class="col-sm-8">
                         <input class="form-control" id="auth_code" />
                     </div>
                 </div>
+                <div class="row justify-content-md-center p-3">
+                    <div class="col-md-auto">
+                        <button type="button" disabled class="btn btn-primary" id="token_button" onclick="tokenClick()">
+                            Get Tokens
+                        </button>
+                    </div>
+                  </div>                
                 <div class="form-group row">
                     <label for="access_token" class="col-sm-4 col-form-label">Access token</label>
                     <div class="col-sm-8">
@@ -138,7 +144,9 @@
                     </div>
                 </div>
             </form>
+
         </div>
+
     </div>
 </body>
 
