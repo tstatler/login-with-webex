@@ -1,17 +1,14 @@
 // Helper function that generates a random alpha/numeric string
 var randomString = function(length) {
     var str = "";
-    var range = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var range = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._~-";
     for(var i = 0; i < length; i++) {
         str += range.charAt(Math.floor(Math.random() * range.length));
     }
     return str;
 }
 
-// Function to generate code verifier and code challenge
-function generateCodeChallenge() {
-	//TBD
-}
+
 
 
 // Helper 	 that parses a query string into a dictionary object
@@ -34,7 +31,8 @@ function codeClick() {
     var nonce = encodeURIComponent(randomString(63));
     var state = encodeURIComponent(randomString(63));
 
-	var codeChallenge = encodeURIComponent(document.getElementById('code_challenge').value);
+	var codeVerifier = randomString(43);
+	var codeChallenge = 
     var codeChallengeMethod = encodeURIComponent(document.getElementById('code_challenge_method').value);
 
     // var requestUrl = `https://webexapis.com/v1/authorize?response_type=${responseType}&scope=${scope}&client_id=${appClientId}&nonce=${nonce}&state=${state}&redirect_uri=${appRedirectUri}&code_challenge=xyzpdq&code_challenge_method=plain`
@@ -116,7 +114,7 @@ function tokenClick() {
 				document.getElementById('access_token').value = authInfo['access_token']; // Retrieve the access_token field, and display it
                 document.getElementById('refresh_token').value = authInfo['refresh_token']; // Retrieve the refresh_token field, and display it
                     document.getElementById('id_token').value = authInfo['id_token']; // Retrieve the refresh_token field, and display it
-			} else alert('Error requesting access token: ' + xhttp.statusText)
+			} else alert('Error requesting access token: ' + xhttp)
  		}
 	}
 	// Build the HTML form request body 

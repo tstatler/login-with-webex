@@ -14,7 +14,7 @@
 
 <body>    
 
-    <div class="container w-50" style="padding: 5em ;">
+    <div class="container w-50" style="padding-bottom: 5em ;">
         <h1>Authorization Code Flow Demo</h1>
 
 
@@ -84,16 +84,9 @@
                     <label for="code_verifier" class="col-sm-4 col-form-label">Code verifier</label>
                     <div class="col-sm-8">
                         <input class="form-control" id="code_verifier" />
-                        <small class="text-muted">Cryptographically random string between 43 and 128 characters in length and consist only numbers, upper- and lower-case letters, hyphens, dots, tildes, or underscores. </small>
+                        <small class="text-muted">Cryptographically random string between 43 and 128 characters in length that consists only of numbers, upper- and lower-case letters, hyphens, dots, tildes, and underscores. (Note: This is technically not a request parameter but it's required to compute the code challenge, which is.</small>
                         
                     </div>                    
-                </div>
-                <div class="form-group row">
-                    <label for="code_challenge" class="col-sm-4 col-form-label">Code challenge</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" id="code_challenge" />
-                        <small class="text-muted">Base64-encoded SHA-256 hash of the Code Verifier string, or, the same value as the Code Verifier, depending on the selected Code Challenge Method. </small>
-                    </div>
                 </div>
                 <div class="form-group row">
                     <label for="code_challenge_method" class="col-sm-4 col-form-label">Code challenge method</label>
@@ -103,6 +96,13 @@
                         <option value="plain">Plain</option>                    
                       </select>                    
 
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="code_challenge" class="col-sm-4 col-form-label">Code challenge</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" id="code_challenge" />
+                        <small class="text-muted">Base64-encoded SHA-256 hash of the Code Verifier string, or, the same value as the Code Verifier, depending on the selected Code Challenge Method. </small>
                     </div>
                 </div>
                 <div class="row justify-content-md-center p-3">
