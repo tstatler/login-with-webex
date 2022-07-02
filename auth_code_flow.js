@@ -8,9 +8,6 @@ var randomString = function(length) {
     return str;
 }
 
-
-
-
 // Helper 	 that parses a query string into a dictionary object
 var parseQueryStr = function( queryString) {
     var params = {}, keyvals, temp, i, l;
@@ -25,14 +22,16 @@ var parseQueryStr = function( queryString) {
 // Step #1: Runs when the user clicks the 'Request Auth Code' button
 function codeClick() {
 
+	var appClientId = document.getElementById('client_id').value
+
 	var appRedirectUri=encodeURIComponent(document.getElementById('redirect_uri').value);
 	var scope = encodeURIComponent(document.getElementById('scope_list').value);
 	var responseType = encodeURIComponent(document.getElementById('response_type').value);
     var nonce = encodeURIComponent(randomString(63));
     var state = encodeURIComponent(randomString(63));
 
-	var codeVerifier = randomString(43);
-	var codeChallenge = 
+	var codeVerifier = encodeURIComponent(document.getElementById('code_verifier').value);
+	var codeChallenge = encodeURIComponent(document.getElementById('code_challenge').value);
     var codeChallengeMethod = encodeURIComponent(document.getElementById('code_challenge_method').value);
 
     // var requestUrl = `https://webexapis.com/v1/authorize?response_type=${responseType}&scope=${scope}&client_id=${appClientId}&nonce=${nonce}&state=${state}&redirect_uri=${appRedirectUri}&code_challenge=xyzpdq&code_challenge_method=plain`
@@ -43,15 +42,15 @@ function codeClick() {
 		'scope=' + scope + '&' + // Requested permission, i.e. Webex Teams room info
 		'state=' + state + '&' +	// Random string for OAuth2 nonce replay protection
 		'client_id=' + appClientId + '&' + // The custom app Client ID
-		// 'prompt=select_account' + '&' +
+		// 'prompt=select_account' + '&' + // Force user to re-authenticate
 		// 'login_hint=user@example.com' + '&' +
-		'nonce=' + nonce + '&' + // Nonce, required for OpenID Connect
-		// 'code_challenge=' + codeChallenge + '&' + // PKCE code challenge
-		// 'code_challenge_method=' + codeChallengeMethod + '&' + // PKCE code challenge method
+		'code_challenge=' + codeChallenge + '&' + // PKCE code challenge
+		'code_challenge_method=' + codeChallengeMethod + '&' + // PKCE code challenge method
 		'redirect_uri=' + appRedirectUri; // The custom app's Redirect URI
 
 	console.log(requestUrl)
     sessionStorage.setItem("client_id", appClientId)
+    sessionStorage.setItem("code_verifier", codeVerifier)
 	window.location = requestUrl; // Redirect the browser to the OAuth2 kickoff URL
 }
 
@@ -65,6 +64,9 @@ window.onload = function(e) {
     }
     if(sessionStorage.getItem("client_secret")) {
         document.getElementById('client_secret').value = sessionStorage.getItem("client_secret")        
+    }
+    if(sessionStorage.getItem("code_verifier")) {
+        document.getElementById('code_verifier').value = sessionStorage.getItem("code_verifier")        
     }
 
 	// Auth code flow

@@ -47,9 +47,9 @@ function getTokens() {
 		'scope=' + scope + '&' + // Requested permission, i.e. Webex Teams room info
 		'state=' + state + '&' +	// Random string for OAuth2 nonce replay protection
 		'client_id=' + appClientId + '&' + // The custom app Client ID
+		'nonce=' + nonce + '&' + // Nonce, required for OpenID Connect
 		// 'prompt=select_account' + '&' +
 		// 'login_hint=jdoe@example.com' + '&' +
-		'nonce=' + nonce + '&' + // Nonce, required for OpenID Connect
 		'redirect_uri=' + appRedirectUri; // The custom app's Redirect URI
 
 		// console.log(requestUrl)
